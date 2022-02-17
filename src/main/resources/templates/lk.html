@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Личный кабинет</title>
+</head>
+<body>
+
+<div class="btn-toolbar mt-5 mb-5"
+     style="display: flex; margin: auto; text-align: center; align-items: center; justify-content: center">
+
+    <form method="get" th:action="'/new'">
+        <input id="id1" name="id1" type="hidden">
+        <button class="btn btn-success"> Write a message</button>
+    </form>
+
+    <form method="post" th:action="'/logout'">
+        <input type="hidden"/>
+        <button class="btn btn-danger"> Sign out</button>
+    </form>
+
+</div>
+
+<div class="container"
+     style="display: flex; margin: auto; text-align: left; align-items: center; justify-content: center">
+
+    <form name="messages">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>From(name)</th>
+                <th>Time</th>
+                <th>Subject</th>
+            </tr>
+
+            <tr th:each="element : ${messages}">
+                <td th:text="${element.getSender()}"></td>
+                <td th:text="${element.getTime()}"></td>
+                <td>
+                    <div class="subject-class">
+                        <a th:text="${element.getSubject()}"></a>
+                        <div class="text-class">
+                            <a th:text="${element.getText()}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <style>
+        .subject-class {
+            position: relative;
+            margin: 0 auto;
+            height: auto;
+            width: auto;
+        }
+
+        .text-class {
+            display: none;
+            padding: 10px;
+            background: #f3f3f3;
+            height: auto;
+            -moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .subject-class:hover .text-class {
+            display: block;
+            position: absolute;
+            top: auto;
+            z-index: 9999;
+            width: auto;
+        }
+    </style>
+
+</div>
+</body>
+</html>
